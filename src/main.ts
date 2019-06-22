@@ -1,6 +1,7 @@
 // main.ts
 import { camera, scene, renderer } from "./renderer";
 import { cube } from './objects';
+import { map } from './map';
 import { DirectionalLight, PointLight } from 'three';
 
 document.body.appendChild(renderer.domElement);
@@ -10,31 +11,45 @@ document.body.appendChild(renderer.domElement);
  */
 const animate = () => {
   requestAnimationFrame(animate);
+
+  // make cube rotate on its axis
+  // taken from threejs get started tutorial
+  cube.rotation.x += 0.01;
+  cube.rotation.y += 0.01;
+  cube.rotation.z += 0.01;
+
   renderer.render(scene, camera);
 }
 
 // add mesh object to the scene
-cube.position.x = -2;
-cube.position.z = -5;
+cube.position.x = 6;
+cube.position.y = 6;
+cube.position.z = 0;
 scene.add(cube);
 
-// add light source to the scene
-const light1 = new DirectionalLight(0xFFFFFF, 0.3);
-const light2 = new DirectionalLight(0xFFFFFF, 0.3);
-const light3 = new DirectionalLight(0xFFFFFF, 0.3);
+// add lighting source to the scene
+// 3 point lighting setup
+const keyLight = new PointLight(0xFFFFFF, 40);
+const fillLight = new PointLight(0xFFFFFF, 30);
+const backLight = new DirectionalLight(0xFFFFFF, 10);
 
-const light4 = new PointLight(0xFFFFFF);
+// TODO (justin) - get rid of magic numbers, set positions programmaticaly?
+// put lights relative to center of scene
+keyLight.position.set(-20, 20, 40);
+fillLight.position.set(10, 20, 28);
+backLight.position.set(-5, 50, -30);
 
-light1.position.set(0, 10, 0);
-light2.position.set(10, 0, 0);
-light3.position.set(0, 0, 10);
+// point lights to origin
+keyLight.lookAt(scene.position);
+fillLight.lookAt(scene.position);
+backLight.lookAt(scene.position);
 
-light4.position.set(0, 25, 100);
+// add lights to the scene
+scene.add(keyLight);
+scene.add(fillLight);
+scene.add(backLight);
 
-scene.add(light1);
-scene.add(light2);
-scene.add(light3);
+scene.add(map);
 
-scene.add(light4);
-
+// run three js animation
 animate();
