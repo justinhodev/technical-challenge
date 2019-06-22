@@ -2,7 +2,8 @@
 import { camera, scene, renderer } from "./renderer";
 import { cube } from './objects';
 import { map } from './map';
-import { DirectionalLight, PointLight } from 'three';
+import { Clock, DirectionalLight, PointLight } from 'three';
+import { playerController } from './player';
 
 document.body.appendChild(renderer.domElement);
 
@@ -17,6 +18,9 @@ const animate = () => {
   cube.rotation.x += 0.01;
   cube.rotation.y += 0.01;
   cube.rotation.z += 0.01;
+
+  // add user input controls
+  playerController.update(new Clock().getDelta());
 
   renderer.render(scene, camera);
 }

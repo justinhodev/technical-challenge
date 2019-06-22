@@ -1,3 +1,4 @@
+// map.ts
 import { MeshBasicMaterial, PlaneBufferGeometry, Mesh } from 'three';
 
 // grid layout for map
