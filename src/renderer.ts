@@ -1,22 +1,28 @@
 // renderer.ts
-import { PerspectiveCamera, Scene, WebGLRenderer } from "three";
+import { OrthographicCamera, Scene, WebGLRenderer } from "three";
 
-const width = window.innerWidth;
-const height = window.innerHeight;
-const viewAngle = 45;
-const nearClipping = 0.1;
-const farClipping = 999;
+// isometric camera options
+// adapted from https://codepen.io/puritanner/pen/LbgMwo
+const aspect = window.innerWidth / window.innerHeight;
+const depth = 60;
+const nearClipping = 1;
+const farClipping = 2000;
 
 const scene = new Scene();
-const camera = new PerspectiveCamera(
-  viewAngle,
-  width / height,
+const camera = new OrthographicCamera(
+  -depth * aspect,
+  depth * aspect,
+  depth,
+  -depth,
   nearClipping,
   farClipping
 );
 
-const renderer = new WebGLRenderer();
+camera.position.set(100, 100, 100); // leveled FOV for iso
+camera.lookAt(scene.position); // origin of the scene
+scene.add(camera);
 
-renderer.setSize(width, height);
+const renderer = new WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
 
 export { camera, scene, renderer };
