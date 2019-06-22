@@ -1,0 +1,6 @@
+{
+  "tslint.configFile": "tslint.json",
+  "prettier.tslintIntegration": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
