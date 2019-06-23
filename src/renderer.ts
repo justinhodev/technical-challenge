@@ -1,5 +1,5 @@
 // renderer.ts
-import { OrthographicCamera, Scene, WebGLRenderer } from "three";
+import { OrthographicCamera, Scene, WebGLRenderer, Color } from 'three';
 
 // isometric camera options
 // adapted from https://codepen.io/puritanner/pen/LbgMwo
@@ -21,6 +21,7 @@ const camera = new OrthographicCamera(
 camera.position.set(100, 100, 100); // leveled FOV for iso
 camera.lookAt(scene.position); // origin of the scene
 scene.add(camera);
+scene.background = new Color(0xf0f0f0);
 
 const renderer = new WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
