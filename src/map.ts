@@ -1,5 +1,11 @@
 // map.ts
-import { MeshBasicMaterial, PlaneBufferGeometry, Mesh } from 'three';
+import {
+  MeshBasicMaterial,
+  PlaneBufferGeometry,
+  Mesh,
+  DoubleSide
+} from 'three';
+import { getRandomNum } from './utils';
 
 // grid layout for map
 // adopted from http://jsfiddle.net/q3m2kh5q/
@@ -24,15 +30,23 @@ const gridRow: number = 100;
 const gridCol: number = 100;
 
 const gridGeometry = new PlaneBufferGeometry(tileWidth, tileLength, 1, 1);
-const gridMaterial = new MeshBasicMaterial();
+const gridMaterial = new MeshBasicMaterial({ side: DoubleSide });
 
 const grid: Mesh[] = [];
 
 // populate grid
 for (let col = -gridCol / 2; col < gridCol / 2; col = col + 1) {
   for (let row = -gridRow / 2; row < gridRow / 2; row = row + 1) {
-    // TODO (justin) randomize color based on seed
-    gridMaterial.color.set('lightgreen');
+    // TODO (justin) use seeded random generation
+    // add pseudo random coloring
+    if (getRandomNum(3) < 1) {
+      gridMaterial.color.set(0x00aa00);
+    } else if (getRandomNum(3) > 1) {
+      gridMaterial.color.set(0x00ff00);
+    } else {
+      gridMaterial.color.set(0x654321);
+    }
+
     const tile = new Mesh(gridGeometry, gridMaterial);
     tile.position.set(col * tileWidth, 0, row * tileLength);
     // rotate to face upwards
