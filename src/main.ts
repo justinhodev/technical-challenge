@@ -1,7 +1,7 @@
 // main.ts
 import { camera, scene, renderer } from './renderer';
 import { cube } from './objects';
-import { map } from './map';
+import { grid, map } from './map';
 import { Clock } from 'three';
 import { playerController } from './player';
 import { lights } from './lighting';
@@ -35,7 +35,9 @@ scene.add(cube);
 // add all lights
 scene.add(...lights);
 
-scene.add(map);
+// create background / ground
+// scene.add(map);
+scene.add(...grid);
 
 // run three js animation
 animate();
