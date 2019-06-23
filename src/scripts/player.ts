@@ -1,5 +1,5 @@
 // player.ts
-import { FirstPersonControls } from '../node_modules/three/examples/jsm/controls/FirstPersonControls';
+import { FirstPersonControls } from 'three/examples/jsm/controls/FirstPersonControls';
 import { camera } from './renderer';
 
 // adapted from https://github.com/mrdoob/three.js/blob/master/examples/webgl_geometry_minecraft.html

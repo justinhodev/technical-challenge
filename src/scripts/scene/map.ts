@@ -5,7 +5,7 @@ import {
   Mesh,
   DoubleSide
 } from 'three';
-import { getRandomNum } from './utils';
+import { getRandomNum } from '../utils';
 
 // grid layout for map
 // adopted from http://jsfiddle.net/q3m2kh5q/

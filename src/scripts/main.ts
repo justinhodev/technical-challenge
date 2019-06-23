@@ -1,10 +1,10 @@
 // main.ts
-import { camera, scene, renderer } from './renderer';
-import { objects } from './objects';
-import { grid, map } from './map';
+import { camera, scene, renderer } from './scene/renderer';
+import { objects } from './objects/index';
+import { grid, map } from './scene/map';
 import { Clock } from 'three';
 import { playerController } from './player';
-import { lights } from './lighting';
+import { lights } from './scene/lighting';
 
 document.body.appendChild(renderer.domElement);
 
@@ -24,7 +24,7 @@ const animate = () => {
   renderer.render(scene, camera);
 };
 
-// add mesh object to the scene
+// add mesh objects to the scene
 objects.forEach((object) => {
   scene.add(object.mesh);
 });
