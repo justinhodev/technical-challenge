@@ -1,10 +1,11 @@
 // main.ts
 import { camera, scene, renderer } from './scene/renderer';
-import { objects } from './objects/index';
+import { cube, hover } from './objects/index';
 import { lights } from './scene/lighting';
 import { gridHelper, raycaster, mouse, plane } from './objects/grid';
-import { Object3D } from 'three';
-import { onMouseMove, onWindowResize } from './utils';
+import { Object3D, Mesh, BoxGeometry, MeshLambertMaterial } from 'three';
+import { onMouseClick, onMouseMove, onWindowResize } from './utils';
+import { colors } from './colors';
 
 document.body.appendChild(renderer.domElement);
 
@@ -14,17 +15,11 @@ document.body.appendChild(renderer.domElement);
 const animate = () => {
   requestAnimationFrame(animate);
 
-  objects.forEach((object) => {
-    object.animate();
-  });
-
   renderer.render(scene, camera);
 };
 
 // add mesh objects to the scene
-objects.forEach((object) => {
-  scene.add(object.mesh);
-});
+scene.add(hover.mesh);
 
 // add all lights
 scene.add(...lights);
@@ -33,10 +28,16 @@ scene.add(...lights);
 scene.add(gridHelper);
 scene.add(plane);
 
-// handle interactions
+// ====================================
+//        Interactions
+// ====================================
+
 const objectArray: Object3D[] = []; // objects which the mouse can collide with
 objectArray.push(plane);
-let hoverMesh = objects[1].mesh;
+const hoverMesh = hover.mesh; // changeable hover object
+
+let currentColor = 0; // color of the object
+
 // move shape outline along with mouse position
 document.addEventListener('mousemove', (event) => {
   onMouseMove(event, mouse, raycaster, hoverMesh, camera, objectArray);
@@ -44,7 +45,25 @@ document.addEventListener('mousemove', (event) => {
 
 // change object when mouse press
 document.addEventListener('mousedown', (event) => {
-  hoverMesh = objects[0].mesh;
+  const intersect = onMouseClick(event, mouse, raycaster, camera, objectArray);
+  if (intersect !== undefined) {
+    const newMesh = new Mesh(new BoxGeometry(50, 50, 50), new MeshLambertMaterial({ color: colors[currentColor] }));
+    newMesh.position.copy(intersect.point).add(intersect.face!.normal);
+    newMesh.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
+    scene.add(newMesh);
+    objectArray.push(newMesh);
+  }
+});
+
+// change output color when tab is pressed
+document.addEventListener('keydown', (event) => {
+  if (event.keyCode === 9) { // tab
+    if (currentColor < colors.length - 1) {
+      currentColor = currentColor + 1;
+    } else {
+      currentColor = 0;
+    }
+  }
 });
 
 // change camera view and re-render on window resize

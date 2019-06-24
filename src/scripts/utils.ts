@@ -1,4 +1,4 @@
-import { Renderer, PerspectiveCamera, Vector2, Raycaster, Mesh, Camera, Object3D } from 'three';
+import { Renderer, PerspectiveCamera, Vector2, Raycaster, Mesh, Camera, Object3D, Intersection } from 'three';
 
 // utils.ts
 
@@ -10,6 +10,11 @@ import { Renderer, PerspectiveCamera, Vector2, Raycaster, Mesh, Camera, Object3D
 export const getRandomNum = (max: number): number => {
   return Math.floor(Math.random() * Math.floor(max));
 };
+
+
+// ====================================
+//         User Interactions
+// ====================================
 
 // taken from https://github.com/mrdoob/three.js/blob/master/examples/webgl_interactive_voxelpainter.html
 
@@ -48,5 +53,21 @@ export const onMouseMove = (event: MouseEvent, mouse: Vector2, raycaster: Raycas
 
     hoverMesh.position.copy(intersect.point).add(intersect.face!.normal);
     hoverMesh.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
+  }
+};
+
+export const onMouseClick = (event: MouseEvent, mouse: Vector2, raycaster: Raycaster, camera: Camera, objects: Object3D[]): Intersection | undefined => {
+  event.preventDefault();
+
+  mouse.set((event.clientX / window.innerWidth) * 2 - 1, -(event.clientY / window.innerHeight) * 2 + 1);
+
+  raycaster.setFromCamera(mouse, camera);
+
+  const intersects = raycaster.intersectObjects(objects);
+
+  if (intersects.length > 0) {
+    const intersect = intersects[0];
+
+    return intersect;
   }
 };
