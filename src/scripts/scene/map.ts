@@ -3,7 +3,8 @@ import {
   MeshBasicMaterial,
   PlaneBufferGeometry,
   Mesh,
-  DoubleSide
+  DoubleSide,
+  GridHelper
 } from 'three';
 import { getRandomNum } from '../utils';
 
@@ -21,6 +22,10 @@ const map = new Mesh(mapGeometry, mapMaterial);
 map.rotation.order = 'YXZ';
 map.rotation.y = -Math.PI / 2;
 map.rotation.x = -Math.PI / 2;
+
+// ============================================
+//              self made grid
+// ============================================
 
 // attempt to make grid using individual planes
 // grid settings

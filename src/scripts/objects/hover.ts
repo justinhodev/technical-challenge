@@ -3,7 +3,7 @@ import { MeshObject } from './object';
 
 // placement outline
 // adapted from https://github.com/mrdoob/three.js/blob/master/examples/webgl_interactive_voxelpainter.html
-const hoverGeometry = new BoxBufferGeometry(25, 25, 25);
+const hoverGeometry = new BoxBufferGeometry(50, 50, 50);
 const hoverMaterial = new MeshBasicMaterial({
   color: 0x444444,
   opacity: 0.5,
