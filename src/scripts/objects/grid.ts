@@ -1,4 +1,12 @@
-import { GridHelper, Raycaster, Vector2, PlaneBufferGeometry, MeshBasicMaterial, Mesh, Object3D } from 'three';
+import {
+  GridHelper,
+  Raycaster,
+  Vector2,
+  PlaneBufferGeometry,
+  MeshBasicMaterial,
+  Mesh,
+  Object3D
+} from 'three';
 
 const gridHelper = new GridHelper(1000, 20);
 

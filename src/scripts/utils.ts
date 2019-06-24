@@ -1,4 +1,13 @@
-import { Renderer, PerspectiveCamera, Vector2, Raycaster, Mesh, Camera, Object3D, Intersection } from 'three';
+import {
+  Renderer,
+  PerspectiveCamera,
+  Vector2,
+  Raycaster,
+  Mesh,
+  Camera,
+  Object3D,
+  Intersection
+} from 'three';
 
 // utils.ts
 
@@ -11,7 +20,6 @@ export const getRandomNum = (max: number): number => {
   return Math.floor(Math.random() * Math.floor(max));
 };
 
-
 // ====================================
 //         User Interactions
 // ====================================
@@ -23,7 +31,10 @@ export const getRandomNum = (max: number): number => {
  * @param camera - view to be resized
  * @param renderer - output to be re-rendered
  */
-export const onWindowResize = (camera: PerspectiveCamera, renderer: Renderer): void => {
+export const onWindowResize = (
+  camera: PerspectiveCamera,
+  renderer: Renderer
+): void => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 
@@ -39,10 +50,20 @@ export const onWindowResize = (camera: PerspectiveCamera, renderer: Renderer): v
  * @param camera - view of scene
  * @param objects - objects to be collided
  */
-export const onMouseMove = (event: MouseEvent, mouse: Vector2, raycaster: Raycaster, hoverMesh: Mesh, camera: Camera, objects: Object3D[]): void => {
+export const onMouseMove = (
+  event: MouseEvent,
+  mouse: Vector2,
+  raycaster: Raycaster,
+  hoverMesh: Mesh,
+  camera: Camera,
+  objects: Object3D[]
+): void => {
   event.preventDefault();
 
-  mouse.set((event.clientX / window.innerWidth) * 2 - 1, -(event.clientY / window.innerHeight) * 2 + 1);
+  mouse.set(
+    (event.clientX / window.innerWidth) * 2 - 1,
+    -(event.clientY / window.innerHeight) * 2 + 1
+  );
 
   raycaster.setFromCamera(mouse, camera);
 
@@ -52,14 +73,27 @@ export const onMouseMove = (event: MouseEvent, mouse: Vector2, raycaster: Raycas
     const intersect = intersects[0];
 
     hoverMesh.position.copy(intersect.point).add(intersect.face!.normal);
-    hoverMesh.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
+    hoverMesh.position
+      .divideScalar(50)
+      .floor()
+      .multiplyScalar(50)
+      .addScalar(25);
   }
 };
 
-export const onMouseClick = (event: MouseEvent, mouse: Vector2, raycaster: Raycaster, camera: Camera, objects: Object3D[]): Intersection | undefined => {
+export const onMouseClick = (
+  event: MouseEvent,
+  mouse: Vector2,
+  raycaster: Raycaster,
+  camera: Camera,
+  objects: Object3D[]
+): Intersection | undefined => {
   event.preventDefault();
 
-  mouse.set((event.clientX / window.innerWidth) * 2 - 1, -(event.clientY / window.innerHeight) * 2 + 1);
+  mouse.set(
+    (event.clientX / window.innerWidth) * 2 - 1,
+    -(event.clientY / window.innerHeight) * 2 + 1
+  );
 
   raycaster.setFromCamera(mouse, camera);
 

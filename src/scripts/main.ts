@@ -47,9 +47,16 @@ document.addEventListener('mousemove', (event) => {
 document.addEventListener('mousedown', (event) => {
   const intersect = onMouseClick(event, mouse, raycaster, camera, objectArray);
   if (intersect !== undefined) {
-    const newMesh = new Mesh(new BoxGeometry(50, 50, 50), new MeshLambertMaterial({ color: colors[currentColor] }));
+    const newMesh = new Mesh(
+      new BoxGeometry(50, 50, 50),
+      new MeshLambertMaterial({ color: colors[currentColor] })
+    );
     newMesh.position.copy(intersect.point).add(intersect.face!.normal);
-    newMesh.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
+    newMesh.position
+      .divideScalar(50)
+      .floor()
+      .multiplyScalar(50)
+      .addScalar(25);
     scene.add(newMesh);
     objectArray.push(newMesh);
   }
@@ -57,7 +64,8 @@ document.addEventListener('mousedown', (event) => {
 
 // change output color when tab is pressed
 document.addEventListener('keydown', (event) => {
-  if (event.keyCode === 9) { // tab
+  if (event.keyCode === 9) {
+    // tab
     if (currentColor < colors.length - 1) {
       currentColor = currentColor + 1;
     } else {

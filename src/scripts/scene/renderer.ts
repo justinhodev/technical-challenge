@@ -1,5 +1,11 @@
 // renderer.ts
-import { OrthographicCamera, Scene, WebGLRenderer, Color, PerspectiveCamera } from 'three';
+import {
+  OrthographicCamera,
+  Scene,
+  WebGLRenderer,
+  Color,
+  PerspectiveCamera
+} from 'three';
 
 // isometric camera options
 // adapted from https://codepen.io/puritanner/pen/LbgMwo
@@ -10,12 +16,7 @@ const nearClipping = 1;
 const farClipping = 10000;
 
 const scene = new Scene();
-const camera = new PerspectiveCamera(
-  fov,
-  aspect,
-  nearClipping,
-  farClipping
-);
+const camera = new PerspectiveCamera(fov, aspect, nearClipping, farClipping);
 // const camera = new OrthographicCamera(
 //   -depth * aspect,
 //   depth * aspect,

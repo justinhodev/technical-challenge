@@ -7,4 +7,4 @@ export interface MeshObject {
   mesh: Mesh;
   /** Applies transformations to the mesh */
   animate(): any;
-};
+}
