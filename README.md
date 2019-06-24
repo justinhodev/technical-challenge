@@ -13,13 +13,16 @@ As there is a limited time for this project, I will only be focusing on completi
 ### Goals
 
 #### Immediate
-- [ ] Render a scene using three js
-- [ ] Import external assets for game models and characters
-- [ ] Add click and drag functionality for interacting with user interface
-- [ ] Spawn new objects based on user interaction
+- [x] Render a scene using three js
+- [x] User interaction through mouse (click and drop functionality for creating objects dynamically)
+- [x] Create affordance with a 'shadow' of the object to be created
+- [x] Add customization options thorugh 'tab' key (change mesh creation parameters)
 
 #### Possible
 - [ ] Enemy AI
+- [ ] Better instructions
+- [ ] Changing actual mesh object to be spawned
+- [ ] Improve UI
 
 ## Technology Stack
 - Three JS
