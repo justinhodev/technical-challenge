@@ -1,0 +1,39 @@
+{
+  "name": "technical-challenge",
+  "version": "1.0.0",
+  "description": "WebGL city builder game using Three JS",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html --public-url ./",
+    "lint": "tslint -p tsconfig.json --fix src/**/*.ts",
+    "format": "prettier --write src/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justinhodev/technical-challenge.git"
+  },
+  "author": "Justin Ho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/justinhodev/technical-challenge/issues"
+  },
+  "homepage": "https://github.com/justinhodev/technical-challenge#readme",
+  "dependencies": {
+    "three": "^0.105.2",
+    "typescript": "^3.5.2"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "prettier": "^1.18.2",
+    "tslint": "^5.17.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "tslint-config-prettier": "^1.18.0"
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "arrowParens": "always",
+    "semi": true,
+    "singleQuote": true
+  }
+}
