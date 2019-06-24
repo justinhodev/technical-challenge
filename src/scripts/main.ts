@@ -34,11 +34,17 @@ scene.add(gridHelper);
 scene.add(plane);
 
 // handle interactions
-const objectArray: Object3D[] = [];
+const objectArray: Object3D[] = []; // objects which the mouse can collide with
 objectArray.push(plane);
-const hoverMesh = objects[1].mesh;
+let hoverMesh = objects[1].mesh;
+// move shape outline along with mouse position
 document.addEventListener('mousemove', (event) => {
   onMouseMove(event, mouse, raycaster, hoverMesh, camera, objectArray);
+});
+
+// change object when mouse press
+document.addEventListener('mousedown', (event) => {
+  hoverMesh = objects[0].mesh;
 });
 
 // change camera view and re-render on window resize
