@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/justinhodev/technical-challenge#readme",
   "dependencies": {
-    "three": "^0.105.2",
+    "three": "^0.125.0",
     "typescript": "^3.5.2"
   },
   "devDependencies": {
